@@ -79,6 +79,10 @@ while (( "$#" )); do
       IMAGE_PASSWORD=$2
       shift 2
       ;;
+    -i|--image-name)
+      IMAGE_NAME=$2
+      shift 2
+      ;;
     -g|--git-repo)
       GIT_URL=$2
       shift 2
@@ -108,13 +112,7 @@ done
 command.init() {
   # This script imports the necessary files into the current project 
   pwd
-  oc apply -f infra/maven-settings-cm.yaml
-  oc apply -f infra/maven-artifact-cache-pvc.yaml
-
-  oc apply -f tasks/kustomize-task.yaml
-  oc apply -f tasks/maven-task.yaml
-
-  oc apply -f pipelines/tekton-pipeline.yaml
+  oc apply -k .
 }
 
 

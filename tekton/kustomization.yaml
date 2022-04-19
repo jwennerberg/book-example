@@ -1,0 +1,22 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: book-ci
+
+resources:
+# infra resources
+- infra/ns.yaml
+- infra/maven-artifact-cache-pvc.yaml
+- infra/maven-settings-cm.yaml
+
+# This is an old nexus server which will be installed in book-ci to cache artifacts
+# NOTE, you need to change tekton/infra/maven-settings-cm.yaml if you don't want to use
+#       THIS nexus instance!
+- infra/nexus.yaml
+
+# tasks
+- tasks/kustomize-task.yaml
+- tasks/maven-task.yaml
+
+# pipelines
+- pipelines/tekton-pipeline.yaml
+
