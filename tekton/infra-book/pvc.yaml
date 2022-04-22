@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: postgresql
+    app.kubernetes.io/component: postgresql
+    app.kubernetes.io/instance: postgresql
+    app.openshift.io/runtime: postgresql
+  name: wanjaserver
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
